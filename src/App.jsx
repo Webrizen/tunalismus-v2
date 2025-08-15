@@ -5,9 +5,12 @@ import Dolphin from './components/Dolphin';
 import HorizontalScrollCarousel from './components/HorizontalScrollCarousel';
 import TestimonialSection from './components/TestimonialSection';
 import FAQ from './components/Faq';
+import { TextAnimate } from './components/TextAnimate';
 
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [isModelLoading, setIsModelLoading] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +58,15 @@ export default function App() {
 
   return (
     <main className='relative'>
+      {isModelLoading && (
+        <div className="fixed inset-0 z-[999999] bg-[var(--color-warm-gray)] flex flex-col items-center justify-center">
+          <div className="relative z-10 text-center">
+            <h1 className="md:text-7xl text-2xl text-black font-mono">
+              {Math.round(loadProgress)}% Loaded
+            </h1>
+          </div>
+        </div>
+      )}
       <div className='fixed w-full h-full pointer-events-none z-10'>
         <Canvas camera={{ position: [0, 0, 5], fov: 50 }} shadows>
           <Environment preset="city" />
@@ -69,6 +81,8 @@ export default function App() {
             scale={0.8}
             positionOverride={positionOverride}
             rotationOverride={rotationOverride}
+            onLoadProgress={(progress) => setLoadProgress(progress)}
+            onLoadStatus={(loaded) => setIsModelLoading(!loaded)}
           />
         </Canvas>
       </div>
@@ -83,10 +97,12 @@ export default function App() {
           <img src="/bg.png" alt="Background" className="absolute w-full h-full object-cover rounded-4xl blur-md z-0 border-0" />
           <div className="container mx-auto px-4 md:py-32 py-28 relative z-50">
             <h1 className="text-3xl md:text-[9rem] font-bold text-center mb-6 text-[var(--color-warm-gray)] uppercase">
-              Learn Languages the Human Way.
+              <TextAnimate by="word" animation="slideUp" startOnView={true}  delay={0.6} duration={0.9}>
+                Learn Languages the Human Way.
+              </TextAnimate>
             </h1>
             <p className="text-lg md:text-[2rem] text-center text-[var(--color-warm-gray)]">
-              Join our community and start your language learning journey today!
+            <TextAnimate animation="blurIn" by="line" startOnView={true}  delay={0.8} duration={0.9}>Join our community and start your language learning journey today!</TextAnimate>
             </p>
           </div>
           <div className="w-[300px] h-12 px-6 bg-[var(--color-warm-gray)] rounded-t-full font-bold text-center text-[var(--color-muted-green)] flex items-end justify-center bottom-0 mx-auto absolute left-0 right-0">

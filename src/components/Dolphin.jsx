@@ -1,8 +1,7 @@
-// src/components/Dolphin.jsx
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useProgress } from "@react-three/drei";
 
 export default function Dolphin({
   modelPath = "/cute_whale.glb",
@@ -12,25 +11,49 @@ export default function Dolphin({
   startRotation = [0, 0, 0],
   endRotation = [0, 0, 0],
   tiltAmount = 0.2,
-  // NEW (optional)
-  positionOverride = null,   // [x,y,z] to directly set position
-  rotationOverride = null,   // [rx,ry,rz] to directly set rotation
+  positionOverride = null,
+  rotationOverride = null,
+  onLoadProgress = () => {}, 
+  onLoadStatus = () => {}, 
   ...props
 }) {
   const group = useRef();
-  const { scene, animations } = useGLTF(modelPath);
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
+  const { progress } = useProgress();
+  const { scene, animations } = useGLTF(
+    modelPath,
+    undefined,
+    undefined,
+    (loader) => {
+      loader.manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+        const calculatedProgress = (itemsLoaded / itemsTotal) * 100;
+        onLoadProgress(calculatedProgress);
+      };
+    }
+  );
   const mixer = useRef();
 
   useEffect(() => {
-    if (animations.length) {
+    if (scene) {
+      setIsModelLoaded(true);
+      onLoadStatus(true);
+    }
+  }, [scene, onLoadStatus]);
+
+  useEffect(() => {
+    onLoadProgress(progress);
+  }, [progress, onLoadProgress]);
+
+  useEffect(() => {
+    if (animations.length && isModelLoaded) {
       mixer.current = new THREE.AnimationMixer(scene);
       animations.forEach((clip) => mixer.current.clipAction(clip).play());
     }
-  }, [animations, scene]);
+  }, [animations, scene, isModelLoaded]);
 
   useFrame((_, delta) => {
     if (mixer.current) mixer.current.update(delta);
-    if (!group.current) return;
+    if (!group.current || !isModelLoaded) return;
 
     // ---- POSITION ----
     if (positionOverride) {
@@ -58,7 +81,6 @@ export default function Dolphin({
       );
     }
 
-    // Keep your tilt on top of either path
     group.current.rotation.z += Math.sin(scrollProgress * Math.PI) * tiltAmount;
   });
 
