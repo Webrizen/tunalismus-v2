@@ -117,7 +117,7 @@ function NavMenu({ activePath }) {
             initial="initial"
             animate="enter"
             exit="exit"
-            className="h-screen bg-[var(--color-muted-green)] fixed right-0 top-0 text-white z-40"
+            className="h-screen bg-[var(--color-muted-green)] fixed right-0 top-0 text-white z-[9999]"
         >
             <div className="box-border h-full p-24 flex flex-col justify-between">
                 <div
@@ -177,8 +177,8 @@ export default function Navbar() {
         <>
             {/* Top nav bar */}
             <motion.header 
-                className={`fixed inset-x-0 z-[99999] h-20 flex items-center ${scrolled ? "top-0" : "md:top-10 top-5"}`}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className={`fixed inset-x-0 z-[99999] h-20 flex items-center ${scrolled ? "top-0" : "md:top-10 top-2 md:px-8"} transition-all duration-300 ease-in-out`}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
             >
                 <div className="mx-auto container w-full px-5 sm:px-10 md:px-12 lg:px-5 h-full">
                     <nav className="flex justify-between items-center h-full">
