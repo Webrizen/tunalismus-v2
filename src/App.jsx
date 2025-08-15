@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import Dolphin from './components/Dolphin';
 import HorizontalScrollCarousel from './components/HorizontalScrollCarousel';
 import TestimonialSection from './components/TestimonialSection';
+import FAQ from './components/Faq';
 
 export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -194,10 +195,10 @@ export default function App() {
       {/* Third Section */}
       <section className="min-h-screen w-full bg-[var(--color-dusty-rose)] rounded-b-full">
         <div className="container mx-auto px-4 md:pt-32 pt-28 relative">
-          <h2 className="text-2xl md:text-[6rem] font-bold text-center mb-6 text-[var(--color-muted-green)]">
+          <h2 className="text-3xl md:mb-0 mb-4 md:text-[6rem] font-bold text-center text-[var(--color-muted-green)] invert">
             Course Offerings
           </h2>
-          <p className="text-lg md:text-[2rem] text-center text-[var(--color-warm-gray)]">
+          <p className="text-md md:text-[2rem] text-center text-[var(--color-warm-gray)] max-w-2xl mx-auto">
             Explore our range of language courses designed to connect you with cultures and people.
           </p>
           <HorizontalScrollCarousel />
@@ -295,6 +296,50 @@ export default function App() {
 
       {/* Fifth Section */}
       <TestimonialSection />
+
+      {/* Sixth Section  */}
+      <FAQ />
+
+      {/* Seventh Section  */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-5 sm:px-10 md:px-12 lg:px-5 relative z-50 backdrop-blur-3xl">
+          <div className="w-full relative py-8 md:py-10 px-6 md:px-8 rounded-2xl bg-gradient-to-tr from-[var(--color-warm-gray)] to-[var(--color-soft-blue)]/20">
+            {/* Top-right abstract accents */}
+            <div className="absolute right-0 top-0 h-full w-full flex justify-end pointer-events-none">
+              <div className="w-28 h-28 overflow-hidden flex rounded-xl relative blur-2xl">
+                <span className="absolute w-16 h-16 -top-1 -right-1 bg-[var(--color-soft-blue)] rounded-md rotate-45" />
+                <span className="absolute w-16 h-16 -bottom-1 -right-1 bg-[var(--color-muted-green)] rounded-md rotate-45" />
+                <span className="absolute w-16 h-16 -bottom-1 -left-1 bg-[var(--color-dusty-rose)] rounded-md rotate-45" />
+              </div>
+            </div>
+            {/* Bottom-left abstract accents */}
+            <div className="absolute left-0 bottom-0 h-full w-full flex items-end pointer-events-none">
+              <div className="w-28 h-28 overflow-hidden flex rounded-xl relative blur-2xl">
+                <span className="absolute w-16 h-16 -top-1 -right-1 bg-[var(--color-soft-blue)] rounded-md rotate-45" />
+                <span className="absolute w-16 h-16 -bottom-1 -right-1 bg-[var(--color-muted-green)] rounded-md rotate-45" />
+                <span className="absolute w-16 h-16 -bottom-1 -left-1 bg-[var(--color-dusty-rose)] rounded-md rotate-45" />
+              </div>
+            </div>
+            <div className="mx-auto text-center max-w-xl md:max-w-2xl relative space-y-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-[var(--color-muted-green)] to-[var(--color-lavender)] uppercase">
+                Ready to Start Your Language Journey?
+              </h1>
+              <p className="text-gray-700">
+                Book a free intro session or dive right in, discover language learning that’s modern, kind, and made for you.
+              </p>
+              <div className="flex justify-center items-center flex-wrap mx-auto gap-4">
+                <a href="#" className="flex items-center h-12 px-6 rounded-full bg-[var(--color-dusty-rose)] text-white border border-[var(--color-dusty-rose)]">
+                  Hire us Now
+                </a>
+                <a href="#" className="flex items-center h-12 px-6 rounded-full bg-[var(--color-muted-green)] text-[var(--color-warm-gray)] border border-[var(--color-muted-green)]/50">
+                  Learn more
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }

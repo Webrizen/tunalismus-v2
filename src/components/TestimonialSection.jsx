@@ -104,7 +104,7 @@ const TestimonialSection = () => {
             </div>
 
             {/* Testimonial Content */}
-            <div className="flex-1 flex flex-col space-y-6 md:space-y-12 lg:space-y-16 md:py-6 lg:py-8 h-full justify-center backdrop-blur-2xl md:p-10">
+            <div className="flex-1 flex flex-col space-y-6 md:space-y-12 lg:space-y-16 md:py-6 lg:py-8 h-full justify-center backdrop-blur-2xl md:p-10 p-5">
               <AnimatePresence custom={direction} mode="wait">
                 <motion.div
                   key={testimonials[currentIndex].id}
