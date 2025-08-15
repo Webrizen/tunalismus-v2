@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import Dolphin from './components/Dolphin';
+import HorizontalScrollCarousel from './components/HorizontalScrollCarousel';
 
 export default function App() {
 const [scrollProgress, setScrollProgress] = useState(0);
@@ -94,7 +95,7 @@ const [scrollProgress, setScrollProgress] = useState(0);
 
       {/* Second Section */}
       <section className="py-20 overflow-hidden" id="second-section">
-        <div className="container mx-auto px-5 sm:px-10 md:px-12 lg:px-5">
+        <div className="container mx-auto px-5 sm:px-10 md:px-12 lg:px-5 relative z-50">
           {/* Decorative elements */}
           <div className="absolute left-0 w-1/3 h-[600px] bg-[var(--color-soft-blue)] opacity-5 -z-10 rounded-full blur-3xl" />
           <div className="absolute right-0 top-1/4 w-1/4 h-[400px] bg-[var(--color-muted-green)] opacity-5 -z-10 rounded-full blur-3xl" />
@@ -192,14 +193,15 @@ const [scrollProgress, setScrollProgress] = useState(0);
         </div>
       </section>
 
-      <section className="min-h-screen w-full">
-        <div className="container mx-auto px-4 md:py-32 relative">
-          <h2 className="text-2xl md:text-[6rem] font-bold text-center mb-6 text-[var(--color-soft-blue)] invert">
-            Join Our Community
+      <section className="min-h-screen w-full bg-[var(--color-dusty-rose)] rounded-b-full">
+        <div className="container mx-auto px-4 md:pt-32 pt-28 relative">
+          <h2 className="text-2xl md:text-[6rem] font-bold text-center mb-6 text-[var(--color-muted-green)]">
+            Course Offerings
           </h2>
-          <p className="text-lg md:text-[2rem] text-center text-[var(--color-warm-gray)] invert">
-            Connect with fellow language learners and share your journey!
+          <p className="text-lg md:text-[2rem] text-center text-[var(--color-warm-gray)]">
+            Explore our range of language courses designed to connect you with cultures and people.
           </p>
+          <HorizontalScrollCarousel />
         </div>
       </section>
     </main>
