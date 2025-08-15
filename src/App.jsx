@@ -329,9 +329,9 @@ export default function App() {
               </p>
               <div className="flex justify-center items-center flex-wrap mx-auto gap-4">
                 <a href="#" className="flex items-center h-12 px-6 rounded-full bg-[var(--color-dusty-rose)] text-white border border-[var(--color-dusty-rose)]">
-                  Hire us Now
+                  Get in touch
                 </a>
-                <a href="#" className="flex items-center h-12 px-6 rounded-full bg-[var(--color-muted-green)] text-[var(--color-warm-gray)] border border-[var(--color-muted-green)]/50">
+                <a href="#" className="flex items-center h-12 px-6 rounded-full bg-[var(--color-muted-green)] text-[var(--color-warm-gray)] border border-[var(--color-muted-green)]/5 invert">
                   Learn more
                 </a>
               </div>
