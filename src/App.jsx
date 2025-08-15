@@ -3,9 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from "@react-three/drei";
 import Dolphin from './components/Dolphin';
 import HorizontalScrollCarousel from './components/HorizontalScrollCarousel';
+import TestimonialSection from './components/TestimonialSection';
 
 export default function App() {
-const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +26,11 @@ const [scrollProgress, setScrollProgress] = useState(0);
   // ⬇️ Keyframes: edit these to place the whale for each phase/section
   // x: left(-) / right(+), y: up(+)/down(-), z: depth (smaller negative = closer to camera behind? depends on your scene)
   const KF = [
-    { pos: [ 0.0, -0.6,  1.0], rot: [0, 0.00 * Math.PI, 0] },  // start (section 1 center-ish)
-    { pos: [ 2.0,  1.0, -1.0], rot: [0, 1.90 * Math.PI, 0] },  // move to right as we exit section 1
-    { pos: [ 0.0,  0.6, -1.0], rot: [0, 1.00 * Math.PI, 0] },  // center while in section 2
-    { pos: [-2.0,  1.0, -1.0], rot: [0, 1.50 * Math.PI, 0] },  // left later in section 2
-    { pos: [ 0.0,  0.2,  0.5], rot: [0, 2.00 * Math.PI, 0] },  // center again in section 3
+    { pos: [0.0, -0.6, 1.0], rot: [0, 0.00 * Math.PI, 0] },  // start (section 1 center-ish)
+    { pos: [2.0, 1.0, -1.0], rot: [0, 1.90 * Math.PI, 0] },  // move to right as we exit section 1
+    { pos: [0.0, 0.6, -1.0], rot: [0, 1.00 * Math.PI, 0] },  // center while in section 2
+    { pos: [-2.0, 1.0, -1.0], rot: [0, 1.50 * Math.PI, 0] },  // left later in section 2
+    { pos: [0.0, 0.2, 0.5], rot: [0, 2.00 * Math.PI, 0] },  // center again in section 3
   ];
 
   // Compute piecewise position/rotation along keyframes
@@ -38,7 +39,7 @@ const [scrollProgress, setScrollProgress] = useState(0);
   const i = Math.max(0, Math.min(segs - 1, Math.floor(scaled)));
   const tLocal = easeInOut(scaled - i);
   const from = KF[i];
-  const to   = KF[i + 1];
+  const to = KF[i + 1];
 
   const positionOverride = [
     lerp(from.pos[0], to.pos[0], tLocal),
@@ -56,7 +57,7 @@ const [scrollProgress, setScrollProgress] = useState(0);
       <div className='fixed w-full h-full pointer-events-none z-10'>
         <Canvas camera={{ position: [0, 0, 5], fov: 50 }} shadows>
           <Environment preset="city" />
-           <Dolphin
+          <Dolphin
             modelPath="/cute_whale.glb"
             scrollProgress={scrollProgress}
             startPosition={[0, -0.6, 1]}
@@ -172,17 +173,14 @@ const [scrollProgress, setScrollProgress] = useState(0);
             {/* Image with creative frame */}
             <div className="w-full lg:w-1/2 xl:w-[45%] relative">
               <div className="relative group">
-                {/* Decorative frame */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-[var(--color-soft-blue)] to-[var(--color-muted-green)] rounded-3xl opacity-20 group-hover:opacity-30 transition-all duration-500" />
-                <div className="absolute -inset-2 border-2 border-[var(--color-dusty-rose)] border-opacity-30 rounded-3xl group-hover:border-opacity-50 transition-all duration-500" />
 
                 {/* Image with hover effect */}
                 <img
-                  src="https://flexiwind.vercel.app/prev/images/woman-with-gro.webp"
+                  src="/sama.png"
                   alt="Founder Sema teaching"
-                  className="relative z-10 w-full h-auto rounded-2xl transform group-hover:-translate-y-2 transition-all duration-500 shadow-xl"
+                  className="relative z-10 w-full h-auto rounded-2xl transform group-hover:-translate-y-2 transition-all duration-500"
                 />
-
+                <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-tr from-gray-100 to-gray-300 dark:from-gray-900 dark:to-gray-700 rounded-3xl" />
                 {/* Floating badge */}
                 <div className="absolute -bottom-6 -right-6 bg-[var(--color-dusty-rose)] text-white px-6 py-3 rounded-full shadow-lg z-20">
                   <span className="font-bold">Sema, Founder</span>
@@ -193,6 +191,7 @@ const [scrollProgress, setScrollProgress] = useState(0);
         </div>
       </section>
 
+      {/* Third Section */}
       <section className="min-h-screen w-full bg-[var(--color-dusty-rose)] rounded-b-full">
         <div className="container mx-auto px-4 md:pt-32 pt-28 relative">
           <h2 className="text-2xl md:text-[6rem] font-bold text-center mb-6 text-[var(--color-muted-green)]">
@@ -204,6 +203,98 @@ const [scrollProgress, setScrollProgress] = useState(0);
           <HorizontalScrollCarousel />
         </div>
       </section>
+
+      {/* Fourth Section */}
+      <section className="py-32">
+        <div className="container mx-auto px-5 sm:px-10 md:px-12 lg:px-5 relative z-50">
+          <div className="flex flex-col space-y-16">
+            <div className="flex flex-col justify-center text-center mx-auto md:max-w-7xl space-y-5">
+              <span className="rounded-lg bg-[var(--color-soft-blue)]/10 px-2.5 py-1 text-xs w-max mx-auto font-semibold tracking-wide text-[var(--color-muted-green)]">
+                Why Choose Us
+              </span>
+              <h1 className="text-2xl md:text-[6rem] font-bold text-center text-[var(--color-muted-green)]">
+                Language Learning, Designed for Real Life
+              </h1>
+              <p className="text-gray-700 max-w-3xl mx-auto md:text-xl">
+                At Tunalismus, learning a new language is never just about grammar, it's about connection, confidence, and being truly understood.
+              </p>
+            </div>
+            <div className="grid gap-14 md:grid-cols-2 lg:grid-cols-4 lg:items-center">
+              {/* Feature 1 */}
+              <div className="order-1 grid gap-10 sm:grid-cols-2 md:order-1 md:grid-cols-1 lg:order-1">
+                <div className="flex flex-col space-y-6 justify-center md:justify-start">
+                  <span className="p-2 rounded-md bg-[var(--color-soft-blue)]/10 text-[var(--color-soft-blue)] flex w-max">
+                    {/* Personalized icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="M10 3.5a4 4 0 014 4c0 2-1.5 3.5-4 3.5S6 9.5 6 7.5a4 4 0 014-4zm2 9.5a8 8 0 01-8 0C4 15 10 15 12 13z" clipRule="evenodd" />
+                    </svg>
+                  </span>
+                  <h1 className="flex text-lg font-semibold capitalize text-gray-900">
+                    Personalized, Human Learning
+                  </h1>
+                  <p className="text-sm font-light text-gray-700">
+                    Lessons adapt to your goals, pace, and story. You’re not just a student—you’re the center of the experience.
+                  </p>
+                </div>
+                <div className="flex flex-col space-y-6 justify-center md:justify-start">
+                  <span className="p-2 rounded-md bg-[var(--color-muted-green)]/10 text-[var(--color-muted-green)] flex w-max">
+                    {/* Community icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path fillRule="evenodd" d="M10 2a4 4 0 011 7.87V12a2 2 0 103.165 1.575A2.5 2.5 0 0010 14a2.5 2.5 0 00-4.165-2.425A2 2 0 109 12V9.87A4 4 0 0110 2z" clipRule="evenodd" />
+                    </svg>
+                  </span>
+                  <h1 className="flex text-lg font-semibold capitalize text-gray-900">
+                    Welcoming Community
+                  </h1>
+                  <p className="text-sm font-light text-gray-700">
+                    Learn with support, encouragement, and celebration for every step. Tunalismus is a safe space for every learner.
+                  </p>
+                </div>
+              </div>
+              {/* Center visual / illustration */}
+              <div className="flex items-center justify-center order-3 md:col-span-2 lg:order-2 lg:row-span-2 lg:h-full">
+                <div className="flex-1 relative bg-gradient-to-tr from-[var(--color-soft-blue)]/30 to-[var(--color-muted-green)]/50 p-6 rounded-lg aspect-[4/2.4] overflow-hidden">
+                  <img src="https://i.pinimg.com/1200x/36/81/03/368103532f3efe3056acdce308b6c0c0.jpg" alt="Language connection illustration" className="w-full h-auto" />
+                </div>
+              </div>
+              {/* Feature 2 */}
+              <div className="order-1 grid gap-10 sm:grid-cols-2 md:order-2 md:grid-cols-1 lg:order-3">
+                <div className="flex flex-col space-y-6 justify-center md:justify-start">
+                  <span className="p-2 rounded-md bg-[var(--color-dusty-rose)]/10 text-[var(--color-dusty-rose)] flex w-max">
+                    {/* Real world icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path d="M2 10a8 8 0 1116 0A8 8 0 012 10zm8 6a6 6 0 100-12 6 6 0 000 12zm0-2a4 4 0 110-8 4 4 0 010 8z" />
+                    </svg>
+                  </span>
+                  <h1 className="flex text-lg font-semibold capitalize text-gray-900">
+                    Real-World Focus
+                  </h1>
+                  <p className="text-sm font-light text-gray-700">
+                    Practice with conversations and scenarios you’ll actually face in life, travel, and work—so you feel ready for the real world.
+                  </p>
+                </div>
+                <div className="flex flex-col space-y-6 justify-center md:justify-start">
+                  <span className="p-2 rounded-md bg-[var(--color-warm-gray)]/50 text-gray-700 flex w-max">
+                    {/* Expertise icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                      <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm3 8a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </span>
+                  <h1 className="flex text-lg font-semibold capitalize text-gray-900">
+                    Experience Across Cultures
+                  </h1>
+                  <p className="text-sm font-light text-gray-700">
+                    Learn from a lifelong connector who’s taught and lived in multilingual environments around the world.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Fifth Section */}
+      <TestimonialSection />
     </main>
   );
 }
